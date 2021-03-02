@@ -1,3 +1,62 @@
+import { useState } from "react";
+
+const PerfReviewFeedbackFormBase = (props) => {
+    // TODO: replace user_name to actual variable.
+    const user_name = "Ethan";
+    const INITIAL_STATE = {
+        reviewer: user_name,
+        rating: 5.0,
+        comment: "",
+    }
+    const [state, setState] = useState({ ...INITIAL_STATE });
+
+    const onSubmit = (event) => {
+        console.log(state);
+        event.preventDefault();
+    }
+
+    const onChange = (event) => {
+        setState({
+            ...state,
+            [event.target.name]: event.target.value
+        });
+    }
+
+    return (
+        <form onSubmit={onSubmit}>
+            <div>
+                <label>Reviewer</label>
+                <input
+                    disabled={true}
+                    onChange={onChange}
+                    name="reviewer"
+                    type="text"
+                    value={user_name}
+                />
+            </div>
+            <div>
+                <label>Rating</label>
+                <input
+                    onChange={onChange}
+                    name="rating"
+                    type="number"
+                    max={5}
+                    step={0.1}
+                    min={1}
+                />
+            </div>
+            <div>
+                <label>Comment</label>
+                <textarea
+                    onChange={onChange}
+                    name="comment"
+                />
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    );
+}
+
 const PerfReviewFeedback = (props) => {
     const { reviewer, rating, comment } = props;
     return (
@@ -41,4 +100,4 @@ const PerfReview = (props) => {
     )
 }
 export default PerfReview;
-export { PerfReviewFeedback };
+export { PerfReviewFeedback, PerfReviewFeedbackFormBase };
