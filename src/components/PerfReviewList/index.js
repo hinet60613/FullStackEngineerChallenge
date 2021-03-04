@@ -2,25 +2,9 @@ import { Link } from 'react-router-dom';
 import { withAuth } from '../Session';
 import * as ROUTES from '../../constants/routes';
 
-const PerfReviewListBase = () => {
-    const item_list = [
-        {
-            id: 1,
-            target: "Alice",
-            reviewer: "Bob",
-        },
-        {
-            id: 2,
-            target: "Alice",
-            reviewer: "Cathy",
-        },
-        {
-            id: 3,
-            target: "Alice",
-            reviewer: "David",
-        },
-    ];
-
+const PerfReviewListBase = (props) => {
+    const item_list = props.auth.doGetPerfReviewList("Alice").result;
+    console.log({ item_list });
     return (
         <ul>
             {
