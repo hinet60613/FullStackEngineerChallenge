@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
+import { AuthContext } from './Components/Session';
+import Backend from './Components/Session/database';
 import './index.css';
 //import App from './App';
 
@@ -8,7 +10,9 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AuthContext.Provider value={new Backend()}>
+      <App />
+    </AuthContext.Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
