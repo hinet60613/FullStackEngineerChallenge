@@ -1,4 +1,4 @@
+import Backend from './backend';
 import AuthContext, { withAuth } from './context';
-import Database from './database';
-export default Database;
+export default Backend;
 export { AuthContext, withAuth };
