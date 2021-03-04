@@ -1,4 +1,4 @@
-class Database {
+class Backend {
     constructor() {
         this.state = {
             auth: null,
@@ -64,4 +64,4 @@ class Database {
     }
 }
 
-export default Database;
+export default Backend;
