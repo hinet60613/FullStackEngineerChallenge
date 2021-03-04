@@ -1,16 +1,24 @@
 const SignInPage = () => (
     <div>
-        <SignInFormBase />
+        <SignInForm />
     </div>
 );
 
 const SignInFormBase = () => {
     return (
         <div>
-            <button onClick={signInNonAdmin}>Sign in</button>
-            <button onClick={signInAdmin}>Sign in as Admin</button>
+            <div>
+                <input type="text" name="user_name" onChange={onChange} />
+                <button onClick={signIn}>Sign in</button>
+            </div>
+            or
+            <div>
+                <button onClick={signInAdmin}>Sign in as Admin</button>
+            </div>
         </div>
     )
 }
+
+const SignInForm = withAuth(SignInFormBase);
 
 export default SignInPage;
