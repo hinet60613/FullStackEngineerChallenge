@@ -1,12 +1,8 @@
 class Database {
     constructor() {
-
-    };
-
-    doGetPerfReviewList = (target) => {
-        // TODO: replace mock perf review list with real data.
-        return {
-            perf_review_list: [
+        this.state = {
+            auth: null,
+            perf_review: [
                 {
                     id: 1,
                     target: "Alice",
@@ -22,7 +18,50 @@ class Database {
                     target: "Alice",
                     reviewer: "David",
                 },
-            ]
+            ],
+        }
+    };
+
+    doSignInAdmin = () => {
+        this.setState({
+            ...this.state,
+            auth: {
+                display_name: "Admin",
+                isAdmin: true,
+            },
+        });
+    }
+
+    doSignIn = (user_name) => {
+        this.setState({
+            ...this.state,
+            auth: {
+                display_name: user_name,
+                isAdmin: false,
+            },
+        });
+    }
+
+    doSignOut = () => {
+        this.setState({
+            ...this.state,
+            auth: null,
+        })
+    }
+
+
+    doGetPerfReviewList = (target) => {
+        // TODO: replace mock perf review list with real data.
+        return {
+            result: this.state.perf_review.filter(review => review.target == target),
+        }
+    }
+    doGetPerfReviewListByReviewer = (reviewer) => {
+        // TODO: replace mock perf review list with real data.
+        return {
+            result: this.state.perf_review.filter(review => review.reviewer == reviewer),
         }
     }
 }
+
+export default Database;
