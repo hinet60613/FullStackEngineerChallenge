@@ -1,14 +1,6 @@
 import { Link } from 'react-router-dom';
+import { withAuth } from '../Session';
 import * as ROUTES from '../../constants/routes';
-
-const PerfReviewList = ({ authUser }) => {
-    return (
-        <div>
-            <Link to={ROUTES.NEW_PERF_REVIEW}>Create</Link>
-            <PerfReviewListBase />
-        </div>
-    );
-}
 
 const PerfReviewListBase = () => {
     const item_list = [
@@ -46,4 +38,16 @@ const PerfReviewListBase = () => {
     );
 }
 
-export default PerfReviewList;
+const PerfReviewList = withAuth(PerfReviewListBase);
+
+const PerfReviewListPage = ({ authUser }) => {
+    return (
+        <div>
+            <Link to={ROUTES.NEW_PERF_REVIEW}>Create</Link>
+            <PerfReviewList />
+        </div>
+    );
+}
+
+
+export default PerfReviewListPage;

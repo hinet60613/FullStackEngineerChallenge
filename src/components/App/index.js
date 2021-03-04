@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 import Navigator from "../Navigation";
 import Landing from "../Landing";
+import PerfReviewListPage from "../PerfReviewList";
 
 const App = () => (
     <Router>
@@ -18,7 +19,7 @@ const App = () => (
                     path={ROUTES.PERF_FEEDBACK + "/:id/:reviewer/:target"}
                     component={PerfReviewFeedbackFormBase}
                 />
-                <Route path={ROUTES.PERF_REVIEW_LIST} component={PerfReviewList} />
+                <Route path={ROUTES.PERF_REVIEW_LIST} component={PerfReviewListPage} />
                 <Route path={ROUTES.PENDING_FEEDBACK} component={PerfReviewList} />
             </Switch>
         </div>
