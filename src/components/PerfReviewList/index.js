@@ -18,8 +18,6 @@ const PerfReviewListBase = (props) => (
     </ul>
 )
 
-const PerfReviewList = withAuth(PerfReviewListBase);
-
 const ReviewerPendingPerfReviewListBase = (props) => {
     const { reviewer } = props;
     const item_list = props.auth.doGetPerfReviewListByReviewer(reviewer).result || [];
