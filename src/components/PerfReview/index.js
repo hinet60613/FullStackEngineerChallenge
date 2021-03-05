@@ -67,7 +67,7 @@ const PerfReviewFeedbackFormBase = (props) => {
         });
     }
     const isInvalid = () => {
-        return state.rating == 0 || state.comment == "";
+        return state.rating === 0 || state.comment === "";
     }
 
     return (
