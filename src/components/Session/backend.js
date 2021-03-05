@@ -23,30 +23,21 @@ class Backend {
     };
 
     doSignInAdmin = () => {
-        this.setState({
-            ...this.state,
-            auth: {
-                display_name: "Admin",
-                isAdmin: true,
-            },
-        });
+        this.state.auth = {
+            display_name: "Admin",
+            isAdmin: true,
+        };
     }
 
     doSignIn = (user_name) => {
-        this.setState({
-            ...this.state,
-            auth: {
-                display_name: user_name,
-                isAdmin: false,
-            },
-        });
+        this.state.auth = {
+            display_name: user_name,
+            isAdmin: false,
+        };
     }
 
     doSignOut = () => {
-        this.setState({
-            ...this.state,
-            auth: null,
-        })
+        this.state.auth = null;
     }
 
 
