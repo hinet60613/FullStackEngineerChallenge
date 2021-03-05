@@ -1,9 +1,18 @@
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
+import { withAuth } from '../Session';
 
-const Navigation = ({ authUser }) => (
-    <div>{authUser ? <NavigationAuth /> : <NavigationNonAuth />}</div>
+const NavigationBase = (props) => (
+    <div>
+        {
+            props.backend?.auth ?
+                <NavigationAuth auth={props.backend.auth} />
+                : <NavigationNonAuth />
+        }
+    </div>
 );
+
+const Navigation = withAuth(NavigationBase);
 
 const NavigationAuth = () => (
     <div>
