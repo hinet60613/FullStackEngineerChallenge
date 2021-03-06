@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import { AuthContext } from './Components/Session';
-import Backend from './Components/Session/database';
+import Backend, { AuthContext } from './components/Session';
 import './index.css';
-//import App from './App';
 
 import reportWebVitals from './reportWebVitals';
 
