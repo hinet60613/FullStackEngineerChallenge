@@ -3,16 +3,46 @@ import { withAuth } from '../Session';
 import * as ROUTES from '../../constants/routes';
 import { useEffect, useState } from 'react';
 
+import { Card, CardContent, Typography, makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles({
+    root: {
+        minWidth: 275,
+    },
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+    },
+    title: {
+        fontSize: 14,
+    },
+    pos: {
+        marginBottom: 12,
+    },
+});
+
 const PerfReviewListBase = (props) => (
     <ul>
         {
             props.review_list.map(
                 ({ id, target, reviewer }, idx) => (
-                    <li key={idx}>
-                        <Link to={ROUTES.PERF_FEEDBACK + `/${id}/${reviewer}/${target}`}>
-                            [{target}] from {reviewer}
-                        </Link>
-                    </li>
+                    <Card key={idx}>
+                        <CardContent>
+                            <Typography color="textSecondary">
+                                #{id}
+                            </Typography>
+                            <Typography variant="h5">
+                                {target}
+                            </Typography>
+                            <Typography className={classes.pos} color="textSecondary">
+                                reviewed by {reviewer}
+                            </Typography>
+                            <Link to={ROUTES.PERF_FEEDBACK + `/${id}/${reviewer}/${target}`}>
+                                [{target}] from {reviewer}
+                            </Link>
+                        </CardContent>
+                    </Card>
                 )
             )
         }
