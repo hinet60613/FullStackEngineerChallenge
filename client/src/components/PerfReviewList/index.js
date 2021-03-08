@@ -38,10 +38,10 @@ const PerfReviewListBase = (props) => (
                             <Typography className={classes.pos} color="textSecondary">
                                 reviewed by {reviewer}
                             </Typography>
-                            <Link to={ROUTES.PERF_FEEDBACK + `/${id}/${reviewer}/${target}`}>
-                                [{target}] from {reviewer}
-                            </Link>
                         </CardContent>
+                        <CardActions>
+                            <Link to={ROUTES.PERF_FEEDBACK + `/${id}/${reviewer}/${target}`}>More</Link>
+                        </CardActions>
                     </Card>
                 )
             )
