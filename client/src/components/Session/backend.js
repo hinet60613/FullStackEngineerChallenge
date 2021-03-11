@@ -41,12 +41,26 @@ class Backend {
     }
 
 
-    doGetPerfReviewList = (target) => {
-        // TODO: replace mock perf review list with real data.
-        return {
-            result: this.state.perf_review.filter(review => review.target == target),
-        }
+    doGetPerfReviewList = async (target) => {
+        // TODO: refactor data fetching to a pack of SDK.
+        fetch('http://127.0.0.1:8080/review')
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+                throw res;
+            })
+            .then(data => {
+                const filtered_data = data.reviews;//.filter(review => review.target == target)
+                console.log({ filtered_data });
+                //debugger;
+                return filtered_data;
+            })
+            .catch(error => {
+                throw error;
+            });
     }
+
     doGetPerfReviewListByReviewer = (reviewer) => {
         // TODO: replace mock perf review list with real data.
         return {
