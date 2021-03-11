@@ -1,13 +1,16 @@
 import PerfReview, { NewPerfReviewFormBase, PerfReviewFeedbackFormBase } from "../PerfReview";
 import PerfReviewList from "../PerfReviewList";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import * as ROUTES from '../../constants/routes';
+
+
 import Navigator from "../Navigation";
 import Landing from "../Landing";
 import PerfReviewListPage from "../PerfReviewList";
-import { withAuth } from "../Session";
 import SignInPage from "../SignIn";
+import { withAuth } from "../Session";
 import { Component } from "react";
+
+import * as ROUTES from '../../constants/routes';
 
 class App extends Component {
     constructor(props) {
