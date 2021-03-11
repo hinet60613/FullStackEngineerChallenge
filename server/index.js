@@ -25,7 +25,40 @@ const _mock = {
             target: "Alice",
             reviewer: "David",
         },
+        {
+            id: 4,
+            target: "Bob",
+            reviewer: "Cathy",
+        },
+        {
+            id: 5,
+            target: "Bob",
+            reviewer: "David",
+        },
+        {
+            id: 6,
+            target: "Cathy",
+            reviewer: "David",
+        },
     ],
+    feedback: {
+        // review_id: {
+        //     review_id: int,
+        //     score:     float,
+        //     comment:   text,
+        // }
+        1: {
+            review_id: 1,
+            score: 4.9,
+            comment: "Always a pleasure to work with you!",
+
+        },
+        2: {
+            review_id: 2,
+            score: 3.0,
+            comment: "Could reply email more often.",
+        }
+    },
     employees: {
         1: {
             id: 1,
