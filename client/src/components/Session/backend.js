@@ -64,7 +64,7 @@ class Backend {
     doGetPerfReviewListByReviewer = (reviewer) => {
         // TODO: replace mock perf review list with real data.
         return {
-            result: this.state.perf_review.filter(review => review.reviewer == reviewer),
+            result: this.state.perf_review.filter(review => review.reviewer === reviewer),
         }
     }
 }
