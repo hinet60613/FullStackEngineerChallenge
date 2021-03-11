@@ -23,3 +23,9 @@ const LandingBase = (props) => {
 const Landing = withAuth(LandingBase);
 
 export default Landing;
+export let tests = {
+    LandingBase
+};
+if (process.env.NODE_ENV !== 'test') {
+    tests = null;
+}
