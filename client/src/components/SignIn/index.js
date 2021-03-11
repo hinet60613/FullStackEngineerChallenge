@@ -1,16 +1,23 @@
 import { useState } from "react";
 import Backend, { withAuth } from "../Session";
+import * as ROUTES from '../../constants/routes'
 
-const SignInPage = () => (
+const SignInPage = (props) => (
     <div>
-        <SignInForm />
+        <SignInForm history={props.history} />
     </div>
 );
 
 const SignInFormBase = (props) => {
     const [userName, setUserName] = useState("");
-    const signInAdmin = () => props.auth.doSignInAdmin();
-    const signIn = () => props.auth.doSignIn(userName);
+    const signInAdmin = () => {
+        props.auth.doSignInAdmin();
+        props.history.push(ROUTES.LANDING);
+    }
+    const signIn = () => {
+        props.auth.doSignIn(userName);
+        props.history.push(ROUTES.LANDING);
+    }
     return (
         <div>
             <div>
