@@ -42,7 +42,7 @@ const ReviewerPendingPerfReviewListBase = (props) => {
             .finally(() => {
                 setLoading(false);
             })
-    }, []);
+    }, [reviewer]);
     if (loading) return 'loading...';
     if (error) return `error: ${error.message}`;
     //const item_list = props.auth.doGetPerfReviewListByReviewer(reviewer).result || [];
@@ -57,16 +57,6 @@ const TargetPerfReviewListBase = (props) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     useEffect(() => {
-        /*
-        const fetchingData = async () => {
-            const res = await fetch('http://localhost:8080/review');
-            if (!res.ok) {
-                throw new Error('error fetching data');
-            }
-            const data = await response.json();
-            return data;
-        }
-        */
         fetch('http://localhost:8080/review')
             .then(res => {
                 if (res.ok) {
@@ -75,7 +65,7 @@ const TargetPerfReviewListBase = (props) => {
                 throw res;
             })
             .then(data => {
-                setReviewList(data.reviews.filter(review => review.target == target));
+                setReviewList(data.reviews.filter(review => review.target === target));
             })
             .catch(error => {
                 console.log('error while fetching', error);
@@ -84,7 +74,7 @@ const TargetPerfReviewListBase = (props) => {
             .finally(() => {
                 setLoading(false);
             });
-    }, []);
+    }, [target]);
 
     if (loading) return 'loading...';
     if (error) return `error: ${error.message}`;
