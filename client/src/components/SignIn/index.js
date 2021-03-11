@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Backend, { withAuth } from "../Session";
+import { withAuth } from "../Session";
 import * as ROUTES from '../../constants/routes'
 
 const SignInPage = (props) => (
