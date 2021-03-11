@@ -1,0 +1,11 @@
+### get feedback info. given id in url.
+GET http://localhost:8080/feedback/1
+
+### update feedback info. given id in url.
+POST http://localhost:8080/feedback/1
+content-type: application/json
+
+{
+    "rating": 4.0,
+    "comment": "Lorem ipsum"
+}

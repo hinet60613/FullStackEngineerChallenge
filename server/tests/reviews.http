@@ -1,0 +1,22 @@
+###
+GET http://localhost:8080/review
+
+###
+GET http://localhost:8080/review/pending/David
+
+
+###
+POST http://localhost:8080/review/new
+content-type: application/json
+
+{
+    "target": "David",
+    "reviewers": [
+        "Alice",
+        "Bob",
+        "Cathy"
+    ]
+}
+
+### get pending review list
+GET http://localhost:8080/review/pending

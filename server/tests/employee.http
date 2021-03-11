@@ -1,0 +1,24 @@
+### read all employees
+GET http://localhost:8080/employee
+
+### read specific employee info by id
+GET http://localhost:8080/employee/1
+
+### update employee info. given id in url
+PUT http://localhost:8080/employee/1
+content-type: application/json
+
+{
+    "name": "Eason"
+}
+
+### delete employee. given id in url.
+DELETE http://localhost:8080/employee/1
+
+### create employee.
+POST http://localhost:8080/employee
+content-type: application/json
+
+{
+    "name": "Flora"
+}
