@@ -2,10 +2,6 @@
 GET http://localhost:8080/review
 
 ###
-GET http://localhost:8080/review/pending/David
-
-
-###
 POST http://localhost:8080/review/new
 content-type: application/json
 
@@ -19,4 +15,10 @@ content-type: application/json
 }
 
 ### get pending review list
-GET http://localhost:8080/review/pending
+GET http://localhost:8080/feedback/pending
+
+### get pending feedback by user
+GET http://localhost:8080/feedback/pending/Alice
+
+### get pending feedback by user (should be none)
+GET http://localhost:8080/feedback/pending/Bob

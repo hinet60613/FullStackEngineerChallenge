@@ -20,11 +20,11 @@ const _mock = {
         },
         3: {
             id: 3,
-            target: "Bob",
+            target: "Cathy",
         },
         4: {
             id: 4,
-            target: "Cathy",
+            target: "David",
         },
     },
     feedback: {
@@ -43,6 +43,12 @@ const _mock = {
             assignee: "Cathy",
             score: 3.0,
             comment: "Could reply email more often.",
+        },
+        3: {
+            id: 3,
+            review_id: 2,
+            assignee: "Alice",
+            pending: true,
         }
     },
     employee: {
@@ -104,19 +110,20 @@ app.post('/employee/:employee_id', (req, res) => {
 app.get('/review', (req, res) => {
     setTimeout(() => {
         res.json({
-            reviews: _mock.reviews,
+            ..._mock.review,
         });
     }, 3000);
 });
 
 app.get('/review/:id', (req, res) => {
     const { id } = req.params;
-    if (!id in _mock.review) {
+    if (!(id in _mock.review)) {
         res.sendStatus(404);
+        return;
     }
 
     const review = _mock.review[id];
-    console.log({feedbacks: Object.values(_mock.feedback).filter(feedback => feedback.review_id == id)});
+    console.log({ feedbacks: Object.values(_mock.feedback).filter(feedback => feedback.review_id == id) });
     const feedbacks = Object.values(_mock.feedback).filter(feedback => feedback.review_id == id);
     res.json({
         ...review,
@@ -125,19 +132,26 @@ app.get('/review/:id', (req, res) => {
 
 });
 
-app.get('/review/pending/:user_name', (req, res) => {
-    setTimeout(() => {
-        const { user_name } = req.params;
-        res.json({
-            result: Object.values(_mock.reviews).filter(review => review.reviewer === user_name),
-        });
-    }, 500);
-})
-
 app.post('/review/new', (req, res) => {
     const { target, reviewers } = req.body;
     console.log("new review created", { target, reviewers });
     res.sendStatus(200);
+});
+
+// [ROUTER] feedback
+app.get('/feedback/pending', (req, res) => {
+    res.json({
+        result: Object.values(_mock.feedback).filter(feedback => feedback.pending === true),
+    });
+});
+
+app.get('/feedback/pending/:user_name', (req, res) => {
+    setTimeout(() => {
+        const { user_name } = req.params;
+        res.json({
+            result: Object.values(_mock.feedback).filter(feedback => feedback.pending === true && feedback.assignee === user_name),
+        });
+    }, 500);
 });
 
 app.listen(PORT, () => {
