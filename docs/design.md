@@ -4,7 +4,7 @@
 ### Review
 
 Review is the data structure for performance review, structured as follows:
-```json
+```javascript
 Review = {
     id: int,     // serial
     target: int, // employee id
@@ -23,7 +23,7 @@ There are several points of potential performance improvement:
 `Feedback` is the data structure for asignee's feedback to specific `Review`.
 
 `Feedback` is structured as follows:
-```json
+```javascript
 Feedback = {
     id: int,        // serial
     review_id: int, // review id
