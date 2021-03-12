@@ -9,57 +9,43 @@ app.use(express.json());
 app.use(cors());
 
 const _mock = {
-    reviews: [
-        {
+    review: {
+        1: {
             id: 1,
             target: "Alice",
-            reviewer: "Bob",
-        },
-        {
-            id: 2,
-            target: "Alice",
-            reviewer: "Cathy",
-        },
-        {
-            id: 3,
-            target: "Alice",
-            reviewer: "David",
-        },
-        {
-            id: 4,
-            target: "Bob",
-            reviewer: "Cathy",
-        },
-        {
-            id: 5,
-            target: "Bob",
-            reviewer: "David",
-        },
-        {
-            id: 6,
-            target: "Cathy",
-            reviewer: "David",
-        },
-    ],
-    feedback: {
-        // review_id: {
-        //     review_id: int,
-        //     score:     float,
-        //     comment:   text,
-        // }
-        1: {
-            review_id: 1,
-            score: 4.9,
-            comment: "Always a pleasure to work with you!",
-
         },
         2: {
-            review_id: 2,
+            id: 2,
+            target: "Bob",
+        },
+        3: {
+            id: 3,
+            target: "Bob",
+        },
+        4: {
+            id: 4,
+            target: "Cathy",
+        },
+    },
+    feedback: {
+        1: {
+            id: 1,
+            review_id: 1,
+            assigner: "Flora", // TODO: replace assigner name to employee id
+            assignee: "Bob",   // TODO: replace assigner name to employee id
+            score: 4.9,
+            comment: "Always a pleasure to work with you!",
+        },
+        2: {
+            id: 2,
+            review_id: 1,
+            assigner: "Flora",
+            assignee: "Cathy",
             score: 3.0,
             comment: "Could reply email more often.",
         }
     },
-    employees: {
+    employee: {
         1: {
             id: 1,
             name: "Alice"
@@ -80,13 +66,20 @@ const _mock = {
             id: 5,
             name: "Eason"
         },
+        6: {
+            id: 5,
+            name: "Flora",
+            isAdmin: true,
+        }
     }
+
 }
 
 app.get('/', (req, res) => {
     res.send('hello world');
 });
 
+// [ROUTER] employee
 app.get('/employee', (req, res) => {
     res.json(_mock.employees);
 });
@@ -107,6 +100,7 @@ app.post('/employee/:employee_id', (req, res) => {
     res.sendStatus(200);
 });
 
+// [ROUTER] review
 app.get('/review', (req, res) => {
     setTimeout(() => {
         res.json({
@@ -117,23 +111,27 @@ app.get('/review', (req, res) => {
 
 app.get('/review/:id', (req, res) => {
     const { id } = req.params;
-    const result = _mock.reviews.filter(review => review.id == id);
-    if (result.length === 0) {
+    if (!id in _mock.review) {
         res.sendStatus(404);
-    } else {
-        res.json({
-            result: result[0],
-        });
     }
+
+    const review = _mock.review[id];
+    console.log({feedbacks: Object.values(_mock.feedback).filter(feedback => feedback.review_id == id)});
+    const feedbacks = Object.values(_mock.feedback).filter(feedback => feedback.review_id == id);
+    res.json({
+        ...review,
+        feedback: [...feedbacks],
+    });
+
 });
 
 app.get('/review/pending/:user_name', (req, res) => {
-    const { user_name } = req.params;
     setTimeout(() => {
+        const { user_name } = req.params;
         res.json({
             result: Object.values(_mock.reviews).filter(review => review.reviewer === user_name),
         });
-    }, 2000);
+    }, 500);
 })
 
 app.post('/review/new', (req, res) => {
