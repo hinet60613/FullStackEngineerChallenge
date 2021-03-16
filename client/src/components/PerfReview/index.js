@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { withAuth } from "../Session";
 
 const NewPerfReviewFormBase = (props) => {
     const INITIAL_STATE = {
@@ -43,6 +44,8 @@ const NewPerfReviewFormBase = (props) => {
         </form>
     )
 }
+
+const NewPerfReviewForm = withAuth(NewPerfReviewFormBase);
 
 const PerfReviewFeedbackFormBase = (props) => {
     const { id, target, reviewer } = props.match.params;
@@ -108,6 +111,8 @@ const PerfReviewFeedbackFormBase = (props) => {
     );
 }
 
+const PerfReviewFeedbackForm = withAuth(PerfReviewFeedbackFormBase);
+
 const PerfReviewFeedback = (props) => {
     const { reviewer, rating, comment } = props;
     return (
@@ -153,6 +158,8 @@ const PerfReview = (props) => {
 export default PerfReview;
 export {
     PerfReviewFeedback,
+    PerfReviewFeedbackForm,
     PerfReviewFeedbackFormBase,
-    NewPerfReviewFormBase
+    NewPerfReviewForm,
+    NewPerfReviewFormBase,
 };
