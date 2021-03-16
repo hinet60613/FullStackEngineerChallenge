@@ -65,7 +65,7 @@ const TargetPerfReviewListBase = (props) => {
                 throw res;
             })
             .then(data => {
-                setReviewList(data.reviews.filter(review => review.target === target));
+                setReviewList(Object.values(data).filter(review => review.target === target));
             })
             .catch(error => {
                 console.log('error while fetching', error);
@@ -78,7 +78,6 @@ const TargetPerfReviewListBase = (props) => {
 
     if (loading) return 'loading...';
     if (error) return `error: ${error.message}`;
-    //const item_list = props.auth.doGetPerfReviewList(target).result || [];
     return <PerfReviewListBase review_list={reviewList} />
 }
 const TargetPerfReviewList = withAuth(TargetPerfReviewListBase);
@@ -90,11 +89,17 @@ const PerfReviewListPage = ({ authUser }) => {
             <Link to={ROUTES.NEW_PERF_REVIEW}>Create</Link>
             <h2>Performance review list for Alice</h2>
             <TargetPerfReviewList target="Alice" />
-            <h2>Pending performance review list for Bob</h2>
-            <ReviewerPendingPerfReviewList reviewer="Bob" />
         </div>
     );
+    /*
+        <h2>Pending performance review list for Bob</h2>
+        <ReviewerPendingPerfReviewList reviewer="Bob" />
+    */
 }
 
 
 export default PerfReviewListPage;
+export {
+    TargetPerfReviewList,
+    ReviewerPendingPerfReviewList
+};
