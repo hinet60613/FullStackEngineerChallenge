@@ -112,7 +112,7 @@ app.get('/review', (req, res) => {
         res.json({
             ..._mock.review,
         });
-    }, 3000);
+    }, 0); // TODO: set timeout to simulate database delay
 });
 
 app.get('/review/:id', (req, res) => {
@@ -151,7 +151,7 @@ app.get('/feedback/pending/:user_name', (req, res) => {
         res.json({
             result: Object.values(_mock.feedback).filter(feedback => feedback.pending === true && feedback.assignee === user_name),
         });
-    }, 500);
+    }, 0); // TODO: set timeout to simulate database delay
 });
 
 app.listen(PORT, () => {
