@@ -31,14 +31,14 @@ const NewPerfReviewFormBase = (props) => {
                 />
             </div>
             <div>
-                <label>
-                    <input
-                        type="text"
-                        name="reviewers"
-                        onChange={onChange}
-                        placeholder="Assign reviewers"
-                    />
-                </label>
+                <label>Assignee</label>
+                <input
+                    type="text"
+                    name="reviewers"
+                    onChange={onChange}
+                    placeholder="Assign reviewers"
+                />
+
             </div>
             <button type="submit">Create</button>
         </form>
@@ -48,7 +48,14 @@ const NewPerfReviewFormBase = (props) => {
 const NewPerfReviewForm = withAuth(NewPerfReviewFormBase);
 
 const PerfReviewFeedbackFormBase = (props) => {
-    const { id, target, reviewer } = props.match.params;
+    const _test_data = {
+        id: 3,
+        target: "Alice",
+        reviewer: "Bob",
+        rating: 0,
+        comment: "",
+    };
+    const { id, target, reviewer } = props.match?.params || _test_data;
     const INITIAL_STATE = {
         id: id,
         target: target,
