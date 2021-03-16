@@ -3,7 +3,7 @@ import { withAuth } from '../Session';
 import * as ROUTES from '../../constants/routes';
 import { useEffect, useState } from 'react';
 
-import { Card, CardContent, Typography, makeStyles } from '@material-ui/core';
+import { Card, CardContent, CardActions, Typography, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
@@ -22,32 +22,35 @@ const useStyles = makeStyles({
     },
 });
 
-const PerfReviewListBase = (props) => (
-    <ul>
-        {
-            props.review_list.map(
-                ({ id, target, reviewer }, idx) => (
-                    <Card key={idx}>
-                        <CardContent>
-                            <Typography color="textSecondary">
-                                #{id}
-                            </Typography>
-                            <Typography variant="h5">
-                                {target}
-                            </Typography>
-                            <Typography className={classes.pos} color="textSecondary">
-                                reviewed by {reviewer}
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Link to={ROUTES.PERF_FEEDBACK + `/${id}/${reviewer}/${target}`}>More</Link>
-                        </CardActions>
-                    </Card>
+const PerfReviewListBase = (props) => {
+    const classes = useStyles();
+    return (
+        <ul>
+            {
+                props.review_list.map(
+                    ({ id, target, reviewer }, idx) => (
+                        <Card key={idx}>
+                            <CardContent>
+                                <Typography color="textSecondary">
+                                    #{id}
+                                </Typography>
+                                <Typography variant="h5">
+                                    {target}
+                                </Typography>
+                                <Typography className={classes.pos} color="textSecondary">
+                                    reviewed by {reviewer}
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Link to={ROUTES.PERF_FEEDBACK + `/${id}/${reviewer}/${target}`}>More</Link>
+                            </CardActions>
+                        </Card>
+                    )
                 )
-            )
-        }
-    </ul>
-)
+            }
+        </ul>
+    );
+}
 
 const ReviewerPendingPerfReviewListBase = (props) => {
     const { reviewer } = props;
