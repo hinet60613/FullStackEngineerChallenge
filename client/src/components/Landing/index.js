@@ -15,7 +15,7 @@ const LandingBase = (props) => {
     const user = props.auth?.state?.auth;
     return (
         <div>
-            {props.auth?.state?.auth ? <LandingWithAuth user={user} /> : <LandingWithoutAuth />}
+            {(user) ? <LandingWithAuth user={user} /> : <LandingWithoutAuth />}
         </div>
     );
 }
