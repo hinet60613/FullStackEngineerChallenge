@@ -1,9 +1,8 @@
-import PerfReview, { NewPerfReviewFormBase, PerfReviewFeedbackFormBase } from "../PerfReview";
+import PerfReview, { NewPerfReviewForm, NewPerfReviewFormBase, PerfReviewFeedbackForm, PerfReviewFeedbackFormBase } from "../PerfReview";
 import PerfReviewList from "../PerfReviewList";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-
-import Navigator from "../Navigation";
+import Navigation from '../Navigation';
 import Landing from "../Landing";
 import PerfReviewListPage from "../PerfReviewList";
 import SignInPage from "../SignIn";
@@ -15,9 +14,6 @@ import * as ROUTES from '../../constants/routes';
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            authUser: null,
-        }
     }
 
     componentDidUpdate() {
@@ -31,19 +27,19 @@ class App extends Component {
         return (
             <Router>
                 <div>
-                    <Navigator />
+                    <Navigation />
                     <hr />
                     <Route exact path={ROUTES.LANDING} component={Landing} />
                     <Route path={ROUTES.SIGN_IN} component={SignInPage} />
+
                     <Switch>
-                        <Route path={ROUTES.NEW_PERF_REVIEW} component={NewPerfReviewFormBase} />
-                        <Route path={ROUTES.PERF_REVIEW} component={PerfReview} />
-                        <Route
-                            path={ROUTES.PERF_FEEDBACK + "/:id/:reviewer/:target"}
-                            component={PerfReviewFeedbackFormBase}
-                        />
-                        <Route path={ROUTES.PERF_REVIEW_LIST} component={PerfReviewListPage} />
-                        <Route path={ROUTES.PENDING_FEEDBACK} component={PerfReviewList} />
+                        <Route path='/review/new' component={NewPerfReviewForm} />
+                        <Route path='/review/:id' component={PerfReview} />
+                        <Route path='/review' component={PerfReviewListPage} />
+
+                        <Route path={ROUTES.FEEDBACK + '/:id'} component={PerfReviewFeedbackForm} />
+                        <Route path={ROUTES.FEEDBACK} component={() => (<div><h2>Pending Feedback</h2></div>)} />
+
                     </Switch>
                 </div>
             </Router>
