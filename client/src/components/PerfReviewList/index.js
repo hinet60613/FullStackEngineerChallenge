@@ -78,7 +78,6 @@ const ReviewerPendingPerfReviewListBase = (props) => {
     }, [reviewer]);
     if (loading) return 'loading...';
     if (error) return `error: ${error.message}`;
-    //const item_list = props.auth.doGetPerfReviewListByReviewer(reviewer).result || [];
     return <PerfReviewListBase review_list={reviewList} />
 };
 
