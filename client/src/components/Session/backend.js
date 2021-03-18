@@ -1,7 +1,7 @@
 class Backend {
     constructor() {
         this.state = {
-            auth: null,
+            auth: JSON.parse(localStorage.getItem("currentUser")),
             perf_review: [
                 {
                     id: 1,
@@ -22,6 +22,7 @@ class Backend {
         }
     };
 
+    // Authentication
     doSignInAdmin = () => {
         this.state.auth = {
             display_name: "Admin",
@@ -34,13 +35,26 @@ class Backend {
             display_name: user_name,
             isAdmin: false,
         };
+        localStorage.setItem("currentUser", JSON.stringify(this.state.auth));
     }
 
     doSignOut = () => {
         this.state.auth = null;
+        localStorage.removeItem("currentUser");
     }
 
+    currentUser = () => {
+        return this.state.auth;
+    }
 
+    isCurrentUserAdmin = () => {
+        if (this.state.auth === null) {
+            return false;
+        }
+        return this.state.auth.isAdmin;
+    }
+
+    // review list
     doGetPerfReviewList = async (target) => {
         // TODO: refactor data fetching to a pack of SDK.
         fetch('http://127.0.0.1:8080/review')
