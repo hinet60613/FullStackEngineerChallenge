@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { withAuth } from "../Session";
+import { isEmail } from 'validator';
 import * as ROUTES from '../../constants/routes'
 
 const SignInPage = (props) => (
@@ -9,22 +10,34 @@ const SignInPage = (props) => (
 );
 
 const SignInFormBase = (props) => {
-    const [userName, setUserName] = useState("");
+    const [account, setAccount] = useState("");
+    const [password, setPassword] = useState("");
     const signInAdmin = () => {
         props.auth.doSignInAdmin();
         props.history.push(ROUTES.LANDING);
     }
-    const signIn = () => {
-        props.auth.doSignIn(userName);
+    const handleSignIn = (event) => {
+        console.log('handle sign in ', { account, password });
+        props.auth.doSignIn(account);
         props.history.push(ROUTES.LANDING);
+        event.preventDefault();
     }
+    const isInvalid = !isEmail(account) || password === "";
     return (
         <div>
             <div>
-                <input type="text" name="user_name" onChange={(e) => { setUserName(e.target.value); }} />
-                <button onClick={signIn}>Sign in</button>
+                <form onSubmit={handleSignIn}>
+                    <div>
+                        <label for="account">Account</label>
+                        <input type="email" name="account" onChange={(e) => { setAccount(e.target.value); }} />
+                    </div>
+                    <div>
+                        <label for="password">Password</label>
+                        <input type="password" name="password" onChange={(e) => { setPassword(e.target.value); }} />
+                    </div>
+                    <button disabled={isInvalid} type="submit">Sign in</button>
+                </form>
             </div>
-            or
             <div>
                 <button onClick={signInAdmin}>Sign in as Admin</button>
             </div>
