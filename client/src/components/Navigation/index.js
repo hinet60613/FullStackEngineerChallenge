@@ -1,11 +1,10 @@
-import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 import { withAuth } from '../Session';
 
 const NavigationWithAuth = (props) => (
     <div>
-        <h1>Hi {props.user.isAdmin?"[Admin]":""}{props.user.display_name}</h1>
+        <h1>Hi {props.user.isAdmin ? "[Admin]" : ""}{props.user.display_name}</h1>
         <nav>
             <ul>
                 <li>
