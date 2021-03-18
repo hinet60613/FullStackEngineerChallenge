@@ -6,7 +6,6 @@ import Landing from "../Landing";
 import PerfReviewListPage from "../PerfReviewList";
 import SignInPage from "../SignIn";
 import { withAuth } from "../Session";
-import { Component } from "react";
 
 import * as ROUTES from '../../constants/routes';
 import PendingFeedbackPage from "../Feedback";
