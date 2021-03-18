@@ -2,6 +2,7 @@ export const LANDING = '/';
 export const REVIEW = '/review'
 export const FEEDBACK='/feedback';
 export const SIGN_IN = '/sign_in';
+export const SIGN_OUT = '/sign_out';
 
 // will be obsolete
 export const PERF_REVIEW_LIST = '/perf_review_list';
