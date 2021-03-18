@@ -1,10 +1,11 @@
+/*
 import { createStyles, Paper } from "@material-ui/core";
 const classes = createStyles({
     container: {
         position: "absolute",
         margin: 10,
     }
-})
+})*/
 
 const FeedbackForm = (props) => {
     const { feedbackId, handleFormExit } = props;

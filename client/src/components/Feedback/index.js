@@ -1,15 +1,16 @@
-import { Paper, Slide, Switch } from '@material-ui/core';
+import { Paper, Slide/*, Switch*/ } from '@material-ui/core';
 import { useState } from 'react';
-//import { PerfReviewFeedbackForm } from '../PerfReview';
 import FeedbackForm from './FeedbackForm';
 import PendingFeedbackList from './PendingFeedbackList';
 
 const PendingFeedbackPage = () => {
     const [showFeedbackForm, setShowFeedbackForm] = useState(false);
     const [formFeedbackId, setFormFeedbackId] = useState(null);
+    /*
     const handleChange = () => {
         setShowFeedbackForm((prev) => !prev);
     }
+    */
 
     const handleItemOnClick = (i) => {
         setFormFeedbackId(i);
@@ -20,7 +21,7 @@ const PendingFeedbackPage = () => {
         setFormFeedbackId(null);
         setShowFeedbackForm(false);
     }
-    const switchFeedbackForm = (<Switch checked={showFeedbackForm} onChange={handleChange} />);
+    //const switchFeedbackForm = (<Switch checked={showFeedbackForm} onChange={handleChange} />);
     return (
         <div>
             <h2>Pending Feedback</h2>
