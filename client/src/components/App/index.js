@@ -10,6 +10,7 @@ import { Component } from "react";
 
 import * as ROUTES from '../../constants/routes';
 import PendingFeedbackPage from "../Feedback";
+import SignOutPage from "../SignOut";
 
 const App = () => (
     <Router>
@@ -18,6 +19,7 @@ const App = () => (
             <hr />
             <Route exact path={ROUTES.LANDING} component={Landing} />
             <Route path={ROUTES.SIGN_IN} component={SignInPage} />
+            <Route path={ROUTES.SIGN_OUT} component={SignOutPage} />
 
             <Switch>
                 <Route path={ROUTES.REVIEW + '/new'} component={NewPerfReviewForm} />
