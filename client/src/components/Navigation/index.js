@@ -5,7 +5,7 @@ import { withAuth } from '../Session';
 
 const NavigationWithAuth = (props) => (
     <div>
-        <h1>Hi {props.user.display_name}</h1>
+        <h1>Hi {props.user.isAdmin?"[Admin]":""}{props.user.display_name}</h1>
         <nav>
             <ul>
                 <li>
@@ -16,6 +16,9 @@ const NavigationWithAuth = (props) => (
                 </li>
                 <li>
                     <Link to={ROUTES.FEEDBACK}>Pending Feedback</Link>
+                </li>
+                <li>
+                    <Link to={ROUTES.SIGN_OUT}>Sign Out</Link>
                 </li>
             </ul>
         </nav>
