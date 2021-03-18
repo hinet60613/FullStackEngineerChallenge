@@ -22,29 +22,35 @@ const useStyles = makeStyles({
     },
 });
 
-const PerfReviewListBase = (props) => {
+const ReviewItemCard = ({ id, target, reviewer }) => {
     const classes = useStyles();
+    return (
+        <Card key={id}>
+            <CardContent>
+                <Typography color="textSecondary">
+                    #{id}
+                </Typography>
+                <Typography variant="h5">
+                    {target}
+                </Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                    reviewed by {reviewer}
+                </Typography>
+            </CardContent>
+            <CardActions>
+                <Link to={ROUTES.REVIEW + `/${id}}`}>More</Link>
+            </CardActions>
+        </Card>
+    );
+}
+
+const PerfReviewListBase = (props) => {
     return (
         <ul>
             {
                 props.review_list.map(
-                    ({ id, target, reviewer }, idx) => (
-                        <Card key={idx}>
-                            <CardContent>
-                                <Typography color="textSecondary">
-                                    #{id}
-                                </Typography>
-                                <Typography variant="h5">
-                                    {target}
-                                </Typography>
-                                <Typography className={classes.pos} color="textSecondary">
-                                    reviewed by {reviewer}
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Link to={ROUTES.PERF_FEEDBACK + `/${id}/${reviewer}/${target}`}>More</Link>
-                            </CardActions>
-                        </Card>
+                    ({ id, target, reviewer }) => (
+                        <ReviewItemCard id={id} target={target} reviewer={reviewer} />
                     )
                 )
             }
