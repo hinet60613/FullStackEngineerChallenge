@@ -130,25 +130,12 @@ const PerfReviewFeedback = (props) => {
     )
 }
 
-const PerfReview = (props) => {
-    const reviews = [
-        {
-            reviewer: "Alice",
-            rating: 4.9,
-            comment: "Always a pleasure to work with you!"
-        },
-        {
-            reviewer: "Bob",
-            rating: 3.0,
-            comment: "Could reply email more often."
-        },
-    ];
-
+const FeedbackList = ({ feedbacks }) => {
     // since we are only appending new data to the end of array, it's safe to use index as key.
     return (
         <div>
             {
-                reviews.map(
+                feedbacks.map(
                     ({ reviewer, rating, comment }, index) => (
                         <PerfReviewFeedback
                             key={index}
@@ -160,13 +147,38 @@ const PerfReview = (props) => {
                 )
             }
         </div>
+    );
+}
+
+const PerfReview = () => {
+    const feedbacks = [
+        {
+            reviewer: "Alice",
+            rating: 4.9,
+            comment: "Always a pleasure to work with you!"
+        },
+        {
+            reviewer: "Bob",
+            rating: 3.0,
+            comment: "Could reply email more often."
+        },
+    ];
+    const overallRating = feedbacks.reduce(
+        (accu, feedback) =>
+            (accu + (feedback.rating / feedbacks.length))
+        , 0);
+
+    return (
+        <div>
+            <h2>Performance Review</h2>
+            <h3>Overall Rating: {overallRating}</h3>
+            <FeedbackList feedbacks={feedbacks} />
+        </div>
     )
 }
 export default PerfReview;
 export {
     PerfReviewFeedback,
     PerfReviewFeedbackForm,
-    PerfReviewFeedbackFormBase,
     NewPerfReviewForm,
-    NewPerfReviewFormBase,
 };
